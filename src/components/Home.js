@@ -1,8 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import HistoricalGraph from "./HistoricalGraph";
 
 const Home = () => {
-  return <h1>HOME</h1>;
+  return (
+    <div>
+      <h1>HOME</h1> <HistoricalGraph />
+    </div>
+  );
 };
 
 export default Home;
