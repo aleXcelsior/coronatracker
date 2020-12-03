@@ -4,31 +4,30 @@ import { Container, TextField, Button } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import axios from "axios";
 
+import { fetchData } from "../actions";
+
 import { Bar, Line, Pie } from "react-chartjs-2";
 
 import { countries } from "../helpers/countries";
+import { connect, useDispatch } from "react-redux";
 
-const HistoricalGraph = () => {
+const HistoricalGraph = (props) => {
   const [historicalData, setHistoricalData] = useState();
   const [chosenCountry, setChosenCountry] = useState("");
   const [textFieldInput, setTextFieldInput] = useState("");
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    if (typeof historicalData === "undefined") {
-      fetchData("Sweden");
+    if (typeof props.data === "undefined") {
+      console.log(typeof props);
+      dispatch(fetchData("Sweden"));
+    } else {
+      console.log(props.data.country);
+      setHistoricalData(props.data.timeline.cases); //this needs to be changed
+      setChosenCountry(props.data.country);
     }
-    console.log(historicalData);
-  }, []);
-
-  const fetchData = async (country) => {
-    const result = await axios(
-      "https://corona.lmao.ninja/v2/historical/" + country + "?lastdays=30"
-    );
-    setHistoricalData(result.data.timeline.cases); //this needs to be changed
-    setChosenCountry(result.data.country);
-
-    console.log(result);
-  };
+  }, [props.data]);
 
   function renderGraph() {
     if (typeof historicalData !== "undefined") {
@@ -81,7 +80,7 @@ const HistoricalGraph = () => {
           id="combo-box-demo"
           options={countries}
           getOptionLabel={(option) => option.label}
-          style={{ width: 300 }}
+          style={{ width: 200 }}
           onChange={(e, v) =>
             handleAutocomplete(v)
           } /* v is the item clicked in the drop-down menu */
@@ -96,14 +95,19 @@ const HistoricalGraph = () => {
           )}
         />
       </form>
-
-      {renderGraph()}
-
-      <Button variant="contained" onClick={() => fetchData(textFieldInput)}>
+      <Button
+        variant="contained"
+        onClick={() => dispatch(fetchData(textFieldInput))}
+      >
         Search
       </Button>
+      {renderGraph()}
     </Container>
   );
 };
 
-export default HistoricalGraph;
+const mapStateToProps = (state) => {
+  return { data: state.data.data };
+};
+
+export default connect(mapStateToProps)(HistoricalGraph);
