@@ -6,3 +6,10 @@ export const fetchData = (country) => async (dispatch) => {
   );
   dispatch({ type: "FETCH_DATA", payload: res });
 };
+
+export const setSelectedCountry = (country) => {
+  return {
+    type: "SELECTED_COUNTRY",
+    payload: country,
+  };
+};

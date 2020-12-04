@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 //import { Link } from "react-router-dom";
 import { Container, TextField, Button } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
-import axios from "axios";
 
-import { fetchData } from "../actions";
+import { fetchData, setSelectedCountry } from "../actions";
 
 import { Bar, Line, Pie } from "react-chartjs-2";
 
@@ -14,16 +13,12 @@ import { connect, useDispatch } from "react-redux";
 const HistoricalGraph = (props) => {
   const [historicalData, setHistoricalData] = useState();
   const [chosenCountry, setChosenCountry] = useState("");
-  const [textFieldInput, setTextFieldInput] = useState("");
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (typeof props.data === "undefined") {
-      console.log(typeof props);
       dispatch(fetchData("Sweden"));
     } else {
-      console.log(props.data.country);
       setHistoricalData(props.data.timeline.cases); //this needs to be changed
       setChosenCountry(props.data.country);
     }
@@ -37,7 +32,6 @@ const HistoricalGraph = (props) => {
       for (var date in historicalData) {
         dates.push(date);
       }
-
       for (var i = 0; i < Object.keys(historicalData).length; i++) {
         cases.push(historicalData[Object.keys(historicalData)[i]]);
       }
@@ -65,17 +59,29 @@ const HistoricalGraph = (props) => {
 
   function handleChange(e) {
     e.preventDefault();
-    setTextFieldInput(e.target.value);
+    dispatch(setSelectedCountry(e.target.value));
   }
 
   function handleAutocomplete(e) {
-    console.log(e.label);
-    setTextFieldInput(e.label);
+    try {
+      dispatch(setSelectedCountry(e.label));
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  function onFormSubmit(e) {
+    e.preventDefault();
+    dispatch(setSelectedCountry(e.target[0].value));
+    dispatch(fetchData(props.country)); //Fetches data if user preses enter instead of using the search button
   }
 
   return (
     <Container>
-      <form noValidate /* autoComplete="off" */>
+      <form
+        onSubmit={(e) => onFormSubmit(e)}
+        noValidate /* autoComplete="off" */
+      >
         <Autocomplete
           id="combo-box-demo"
           options={countries}
@@ -97,7 +103,7 @@ const HistoricalGraph = (props) => {
       </form>
       <Button
         variant="contained"
-        onClick={() => dispatch(fetchData(textFieldInput))}
+        onClick={() => dispatch(fetchData(props.country))}
       >
         Search
       </Button>
@@ -107,7 +113,9 @@ const HistoricalGraph = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return { data: state.data.data };
+  const { selectedCountry } = state;
+
+  return { data: state.data.data, country: selectedCountry };
 };
 
 export default connect(mapStateToProps)(HistoricalGraph);

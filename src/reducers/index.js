@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-const fetchDataReducer = (state = [], action) => {
+const fetchDataReducer = (state = {}, action) => {
   switch (action.type) {
     case "FETCH_DATA":
       console.log(action.payload);
@@ -10,6 +10,16 @@ const fetchDataReducer = (state = [], action) => {
   }
 };
 
+const setSelectedCountryReducer = (initialState = "Sweden", action) => {
+  switch (action.type) {
+    case "SELECTED_COUNTRY":
+      return action.payload;
+    default:
+      return initialState;
+  }
+};
+
 export default combineReducers({
   data: fetchDataReducer,
+  selectedCountry: setSelectedCountryReducer,
 });
