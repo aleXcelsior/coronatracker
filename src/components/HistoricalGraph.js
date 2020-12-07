@@ -81,6 +81,7 @@ const HistoricalGraph = (props) => {
       <form
         onSubmit={(e) => onFormSubmit(e)}
         noValidate /* autoComplete="off" */
+        className="graph-scroll"
       >
         <Autocomplete
           id="combo-box-demo"

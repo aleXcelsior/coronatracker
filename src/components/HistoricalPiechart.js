@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Pie, Chart } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 import { connect, useDispatch } from "react-redux";
 
 const HistoricalPiechart = (props) => {
