@@ -20,7 +20,7 @@ const HistoricalGraph = (props) => {
       dispatch(fetchData("Sweden"));
     } else {
       setHistoricalData(props.data.timeline.cases); //this needs to be changed
-      setChosenCountry(props.data.country);
+      setChosenCountry(props.country);
     }
   }, [props.data]);
 
@@ -59,12 +59,12 @@ const HistoricalGraph = (props) => {
 
   function handleChange(e) {
     e.preventDefault();
-    dispatch(setSelectedCountry(e.target.value));
+    setChosenCountry(e.target.value);
   }
 
   function handleAutocomplete(e) {
     try {
-      dispatch(setSelectedCountry(e.label));
+      setChosenCountry(e.label);
     } catch (e) {
       console.log(e);
     }
@@ -72,8 +72,13 @@ const HistoricalGraph = (props) => {
 
   function onFormSubmit(e) {
     e.preventDefault();
-    dispatch(setSelectedCountry(e.target[0].value));
-    dispatch(fetchData(props.country)); //Fetches data if user preses enter instead of using the search button
+    setChosenCountry(e.target[0].value);
+    fetchDataAndSetChosenCountry();
+  }
+
+  function fetchDataAndSetChosenCountry() {
+    dispatch(setSelectedCountry(chosenCountry));
+    dispatch(fetchData(props.country));
   }
 
   return (
@@ -104,7 +109,7 @@ const HistoricalGraph = (props) => {
       </form>
       <Button
         variant="contained"
-        onClick={() => dispatch(fetchData(props.country))}
+        onClick={() => fetchDataAndSetChosenCountry()}
       >
         Search
       </Button>

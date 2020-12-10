@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import { fetchData, setSelectedCountry } from "../actions";
 
@@ -10,15 +10,16 @@ import { countries } from "../helpers/countries";
 
 const Landing = (props) => {
   const dispatch = useDispatch();
+  const [chosenCountry, setChosenCountry] = useState("Sweden");
 
   function handleChange(e) {
     e.preventDefault();
-    dispatch(setSelectedCountry(e.target.value));
+    setChosenCountry(e.target.value);
   }
 
   function handleAutocomplete(e) {
     try {
-      dispatch(setSelectedCountry(e.label));
+      setChosenCountry(e.label);
     } catch (e) {
       console.log(e);
     }
@@ -32,6 +33,7 @@ const Landing = (props) => {
 
   fetch = () => {
     dispatch(fetchData(props.country));
+    dispatch(setSelectedCountry(chosenCountry));
 
     try {
       var el = document.querySelector(".graph-scroll");

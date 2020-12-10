@@ -31,12 +31,10 @@ const HistoricalPiechart = (props) => {
 
       var recoveredLast30Days = lastRecovered - firstRecovered;
 
-      console.log(deathsLast30Days, "<- deaths");
-
       return [casesLast30Days, recoveredLast30Days, deathsLast30Days];
     }
 
-    return [1, 1, 1];
+    return [1, 1, 1]; //gets returned if top guy doesnt run
   }
 
   var graphData = {
@@ -55,7 +53,7 @@ const HistoricalPiechart = (props) => {
   };
 
   return (
-    <div style={{ height: "500px" }}>
+    <div style={{ height: "500px", paddingBottom: "200px" }}>
       <h1>HistoricalPiechart</h1>
       <Pie
         data={graphData}
