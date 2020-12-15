@@ -30,10 +30,16 @@ const Landing = (props) => {
   function onFormSubmit(e) {
     e.preventDefault();
     dispatch(setSelectedCountry(e.target[0].value));
-    dispatch(fetchData(props.country)); //Fetches data if user preses enter instead of using the search button
+    dispatch(fetchData(chosenCountry)); //Fetches data if user preses enter instead of using the search button
   }
 
   fetch = () => {
+    console.log(
+      chosenCountry,
+      " <- chosenCountry ",
+      props.country,
+      "<- props.country"
+    );
     dispatch(fetchData(props.country));
     dispatch(setSelectedCountry(chosenCountry));
 

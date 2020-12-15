@@ -1,6 +1,8 @@
 import axios from "axios";
 
 export const fetchData = (country) => async (dispatch) => {
+  console.log("fetching", country);
+
   const res = await axios(
     "https://corona.lmao.ninja/v2/historical/" + country + "?lastdays=30"
   );

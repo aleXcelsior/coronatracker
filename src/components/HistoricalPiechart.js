@@ -9,6 +9,7 @@ const HistoricalPiechart = (props) => {
   useEffect(() => {
     //console.log(data, "<- From historicalpiechart");
     //console.log(country, "<- From historicalpiechart");
+    console.log(data);
   }, [data, country]);
 
   function pieChartData() {
