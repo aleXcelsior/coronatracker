@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  height: 70px;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 5;
+  margin-bottom: 10%;
+  padding-left: 5vh;
+  display: flex;
+  align-items: center;
+
+  background-color: white;
+
+  -webkit-box-shadow: 0px 8px 18px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 8px 18px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-right {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 5vh;
+  float: right;
+  height: 100%;
+  width: 100%;
+}
+
+.button-div {
+  display: flex;
+  align-self: center;
+  height: 40%;
+  padding-left: 10px;
+}

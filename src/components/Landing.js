@@ -7,9 +7,11 @@ import { TextField, Button } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
 import { countries } from "../helpers/countries";
+import { useHistory } from "react-router-dom";
 
 const Landing = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [chosenCountry, setChosenCountry] = useState("Sweden");
 
   function handleChange(e) {
@@ -35,21 +37,13 @@ const Landing = (props) => {
     dispatch(fetchData(props.country));
     dispatch(setSelectedCountry(chosenCountry));
 
-    try {
-      var el = document.querySelector(".graph-scroll");
-
-      el.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-        inline: "nearest",
-      });
-    } catch (error) {}
+    history.push("/home");
   };
 
   return (
     <div className="landing-container">
-      <h1>Welcome to trakkr</h1>
-      <h2>
+      <h1 className="landing-text-color">Welcome to trakkr</h1>
+      <h2 className="landing-text-color">
         Please chose a country by typing in the name or chosing in the
         drop-down.
       </h2>
@@ -69,15 +63,20 @@ const Landing = (props) => {
             <TextField
               {...params}
               onChange={handleChange}
-              id="filled-basic"
+              id="standard-basic"
               label="Country"
-              variant="filled"
+              variant="standard"
             />
           )}
         />
       </form>
-      <Button variant="contained" onClick={fetch}>
-        Search
+      <Button
+        style={{ marginTop: "30px" }}
+        variant="contained"
+        color="primary"
+        onClick={fetch}
+      >
+        <span className="button-landing">Search</span>
       </Button>
     </div>
   );

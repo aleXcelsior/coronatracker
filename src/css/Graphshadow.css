@@ -1,0 +1,14 @@
+.graph-shadow {
+  -webkit-box-shadow: 0px 0px 9px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 9px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5vh;
+}
+
+.MuiPaper-root {
+  -webkit-box-shadow: 0px 0px 9px 6px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0px 0px 9px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.country-name {
+  padding-top: 20px;
+}

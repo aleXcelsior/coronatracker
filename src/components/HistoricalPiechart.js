@@ -53,8 +53,15 @@ const HistoricalPiechart = (props) => {
   };
 
   return (
-    <div style={{ height: "500px", paddingBottom: "200px" }}>
-      <h1>HistoricalPiechart</h1>
+    <div
+      className="graph-shadow"
+      style={{
+        height: "500px",
+        paddingBottom: "30px",
+        paddingTop: "30px",
+        marginBottom: "150px",
+      }}
+    >
       <Pie
         data={graphData}
         options={{

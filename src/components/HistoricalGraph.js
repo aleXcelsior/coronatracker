@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-//import { Link } from "react-router-dom";
 import { Container, TextField, Button } from "@material-ui/core";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import { Bar } from "react-chartjs-2";
+import { connect, useDispatch } from "react-redux";
 
 import { fetchData, setSelectedCountry } from "../actions";
-
-import { Bar, Line, Pie } from "react-chartjs-2";
-
 import { countries } from "../helpers/countries";
-import { connect, useDispatch } from "react-redux";
+
+import "../css/Graphshadow.css";
 
 const HistoricalGraph = (props) => {
   const [historicalData, setHistoricalData] = useState();
@@ -57,62 +56,9 @@ const HistoricalGraph = (props) => {
     }
   }
 
-  function handleChange(e) {
-    e.preventDefault();
-    setChosenCountry(e.target.value);
-  }
-
-  function handleAutocomplete(e) {
-    try {
-      setChosenCountry(e.label);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  function onFormSubmit(e) {
-    e.preventDefault();
-    setChosenCountry(e.target[0].value);
-    fetchDataAndSetChosenCountry();
-  }
-
-  function fetchDataAndSetChosenCountry() {
-    dispatch(setSelectedCountry(chosenCountry));
-    dispatch(fetchData(props.country));
-  }
-
   return (
-    <Container>
-      <form
-        onSubmit={(e) => onFormSubmit(e)}
-        noValidate /* autoComplete="off" */
-        className="graph-scroll"
-      >
-        <Autocomplete
-          id="combo-box-demo"
-          options={countries}
-          getOptionLabel={(option) => option.label}
-          style={{ width: 200 }}
-          onChange={(e, v) =>
-            handleAutocomplete(v)
-          } /* v is the item clicked in the drop-down menu */
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              onChange={handleChange}
-              id="filled-basic"
-              label="Country"
-              variant="filled"
-            />
-          )}
-        />
-      </form>
-      <Button
-        variant="contained"
-        onClick={() => fetchDataAndSetChosenCountry()}
-      >
-        Search
-      </Button>
+    <Container className="graph-shadow">
+      <h2 className="country-name">{props.country}</h2>
       {renderGraph()}
     </Container>
   );

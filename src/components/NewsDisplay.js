@@ -20,8 +20,6 @@ const NewsDisplay = (props) => {
   const lookup = require("country-code-lookup");
   var countryIso2 = lookup.byCountry(selectedCountry).iso2;
 
-  console.log(countryIso2, "<- ISO2");
-
   useEffect(() => {
     const options = {
       method: "GET",

@@ -186,7 +186,6 @@ const countries = [
   { code: "PK", label: "Pakistan", phone: "92" },
   { code: "PL", label: "Poland", phone: "48" },
   { code: "PM", label: "Saint Pierre and Miquelon", phone: "508" },
-  { code: "PN", label: "Pitcairn", phone: "870" },
   { code: "PR", label: "Puerto Rico", phone: "1" },
   { code: "PS", label: "Palestine, State of", phone: "970" },
   { code: "PT", label: "Portugal", phone: "351" },

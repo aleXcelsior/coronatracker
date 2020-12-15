@@ -1,0 +1,59 @@
+This was right above {renderGraph()} inside of "HistoricalGraph"
+
+<form
+        onSubmit={(e) => onFormSubmit(e)}
+        noValidate /* autoComplete="off" */
+        className="graph-scroll"
+      >
+        <Autocomplete
+          id="combo-box-demo"
+          options={countries}
+          getOptionLabel={(option) => option.label}
+          style={{ width: 200 }}
+          onChange={(e, v) =>
+            handleAutocomplete(v)
+          } /* v is the item clicked in the drop-down menu */
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              onChange={handleChange}
+              id="filled-basic"
+              label="Country"
+              variant="filled"
+            />
+          )}
+        />
+      </form>
+      <Button
+        variant="contained"
+        onClick={() => fetchDataAndSetChosenCountry()}
+      >
+        Search
+      </Button>
+
+
+It needs these functions above the return aswell:
+
+function handleChange(e) {
+    e.preventDefault();
+    setChosenCountry(e.target.value);
+  }
+
+  function handleAutocomplete(e) {
+    try {
+      setChosenCountry(e.label);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  function onFormSubmit(e) {
+    e.preventDefault();
+    setChosenCountry(e.target[0].value);
+    fetchDataAndSetChosenCountry();
+  }
+
+  function fetchDataAndSetChosenCountry() {
+    dispatch(setSelectedCountry(chosenCountry));
+    dispatch(fetchData(props.country));
+  }

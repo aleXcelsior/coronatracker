@@ -1,13 +1,16 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import HistoricalGraph from "./HistoricalGraph";
+import { Container } from "@material-ui/core";
 import HistoricalPiechart from "./HistoricalPiechart";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-import Landing from "./Landing";
 import NewsDisplay from "./NewsDisplay";
+import StickyHeader from "./StickyHeader";
+import TrakkrInformationText from "./TrakkrInformationText";
+
+import "../css/Header.css";
 
 const Home = () => {
   useEffect(() => {
@@ -16,19 +19,19 @@ const Home = () => {
 
   return (
     <div>
-      <div data-aos="fade-down" data-aos-duration="2000">
-        <Landing />
-      </div>
-
-      <div data-aos="fade-left" data-aos-duration="3000">
-        <HistoricalGraph />
-      </div>
-      <div data-aos="fade-right" data-aos-duration="3000">
-        <HistoricalPiechart />
-      </div>
-      <div data-aos="fade" data-aos-duration="3000">
-        <NewsDisplay />
-      </div>
+      <StickyHeader />
+      <Container>
+        <div data-aos="fade" data-aos-duration="3000">
+          <HistoricalGraph />
+        </div>
+        <TrakkrInformationText />
+        <div data-aos="fade" data-aos-duration="3000">
+          <HistoricalPiechart />
+        </div>
+        <div data-aos="fade" data-aos-duration="2000">
+          <NewsDisplay />
+        </div>
+      </Container>
     </div>
   );
 };
