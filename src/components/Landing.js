@@ -34,13 +34,7 @@ const Landing = (props) => {
   }
 
   fetch = () => {
-    console.log(
-      chosenCountry,
-      " <- chosenCountry ",
-      props.country,
-      "<- props.country"
-    );
-    dispatch(fetchData(props.country));
+    dispatch(fetchData(chosenCountry));
     dispatch(setSelectedCountry(chosenCountry));
 
     history.push("/home");
@@ -55,7 +49,7 @@ const Landing = (props) => {
       </h2>
       <form
         onSubmit={(e) => onFormSubmit(e)}
-        noValidate /* autoComplete="off" */
+        noValidate /* autoComplete="on" */
       >
         <Autocomplete
           id="combo-box-demo"

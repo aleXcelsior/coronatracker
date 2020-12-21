@@ -14,7 +14,8 @@ import "../css/Header.css";
 
 const Home = () => {
   useEffect(() => {
-    AOS.init({});
+    AOS.init();
+    AOS.refresh();
   });
 
   return (
