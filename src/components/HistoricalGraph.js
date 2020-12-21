@@ -15,6 +15,7 @@ const HistoricalGraph = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log(props.country, "from useeffect"); //This needs to be re-worked!!!
     if (typeof props.data === "undefined") {
       dispatch(fetchData("Sweden"));
     } else {

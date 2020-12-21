@@ -34,8 +34,9 @@ const Landing = (props) => {
   }
 
   fetch = () => {
-    dispatch(fetchData(chosenCountry));
+    console.log("Chosen country at dispatch: ", chosenCountry);
     dispatch(setSelectedCountry(chosenCountry));
+    dispatch(fetchData(chosenCountry));
 
     history.push("/home");
   };
