@@ -9,11 +9,14 @@ const HistoricalPiechart = (props) => {
   useEffect(() => {
     //console.log(data, "<- From historicalpiechart");
     //console.log(country, "<- From historicalpiechart");
-    console.log(data);
+    console.log("Piechart log", data);
   }, [data, country]);
 
   function pieChartData() {
-    if (typeof data !== "undefined" && data.hasOwnProperty("timeline")) {
+    if (
+      typeof data !== "undefined" &&
+      data.hasOwnProperty("timeline" && typeof data.cases !== "undefined")
+    ) {
       const { cases, deaths, recovered } = data.timeline;
 
       var length = Object.keys(cases).length - 1;

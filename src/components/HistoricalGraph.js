@@ -19,7 +19,7 @@ const HistoricalGraph = (props) => {
     if (typeof props.data === "undefined") {
       dispatch(fetchData("Sweden"));
     } else {
-      setHistoricalData(props.data.timeline.cases); //this needs to be changed
+      setHistoricalData(props.data.timeline?.cases); //this needs to be changed
       setChosenCountry(props.country);
     }
   }, [props.data]);
