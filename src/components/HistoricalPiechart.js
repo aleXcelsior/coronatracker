@@ -13,10 +13,7 @@ const HistoricalPiechart = (props) => {
   }, [data, country]);
 
   function pieChartData() {
-    if (
-      typeof data !== "undefined" &&
-      data.hasOwnProperty("timeline" && typeof data.cases !== "undefined")
-    ) {
+    if (typeof data !== "undefined" && data.hasOwnProperty("timeline")) {
       const { cases, deaths, recovered } = data.timeline;
 
       var length = Object.keys(cases).length - 1;
